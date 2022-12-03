@@ -15,7 +15,7 @@ const HomePage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>{!session ? <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" /> : <AcDetails session={session} />}</div>
+      <div>{session ? <AcDetails session={session} /> : <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" />}</div>
     </>
   )
 }

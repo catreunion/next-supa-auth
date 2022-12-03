@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
 
-const AvatarComp = ({ uid, url, size, onUpload }) => {
+const Avatar = ({ uid, url, size, onUpload }) => {
   const supabase = useSupabaseClient()
   const [avatarUrl, setAvatarUrl] = useState(null)
   const [uploading, setUploading] = useState(false)
@@ -13,8 +13,7 @@ const AvatarComp = ({ uid, url, size, onUpload }) => {
         if (error) {
           throw error
         }
-        const url = URL.createObjectURL(data)
-        setAvatarUrl(url)
+        setAvatarUrl(URL.createObjectURL(data))
       } catch (error) {
         console.log("Error downloading image: ", error)
       }
@@ -30,8 +29,8 @@ const AvatarComp = ({ uid, url, size, onUpload }) => {
         throw new Error("You must select an image to upload.")
       }
       const file = event.target.files[0]
-      const fileExt = file.name.split(".").pop()
-      const fileName = `${uid}.${fileExt}`
+      const fileExtn = file.name.split(".").pop()
+      const fileName = `${uid}.${fileExtn}`
       const filePath = `${fileName}`
       let { error: uploadError } = await supabase.storage.from("avatars").upload(filePath, file, { upsert: true })
       if (uploadError) {
@@ -47,8 +46,8 @@ const AvatarComp = ({ uid, url, size, onUpload }) => {
   }
 
   return (
-    <div>
-      {avatarUrl ? <img src={avatarUrl} alt="Avatar" className="avatar image" style={{ height: size, width: size }} /> : <div className="avatar no-image" style={{ height: size, width: size }} />}
+    <>
+      {avatarUrl ? <img src={avatarUrl} alt="Avatar" style={{ height: size, width: size }} /> : <div style={{ height: size, width: size }} />}
       <div style={{ width: size }}>
         <label className="button primary block" htmlFor="single">
           {uploading ? "Uploading ..." : "Upload"}
@@ -65,8 +64,8 @@ const AvatarComp = ({ uid, url, size, onUpload }) => {
           disabled={uploading}
         />
       </div>
-    </div>
+    </>
   )
 }
 
-export default AvatarComp
+export default Avatar
