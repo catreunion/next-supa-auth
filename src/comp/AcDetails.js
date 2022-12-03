@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react"
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react"
 import Avatar from "@/comp/Avatar"
 
 const AcDetails = ({ session }) => {
@@ -41,7 +41,7 @@ const AcDetails = ({ session }) => {
         id: user.id,
         username,
         website,
-        avatarURL,
+        avatar_url: avatarURL,
         updated_at: new Date().toISOString()
       }
       let { error } = await supabase.from("profiles").upsert(updates)
@@ -72,16 +72,6 @@ const AcDetails = ({ session }) => {
         <input id="website" type="website" value={website || ""} onChange={(e) => setWebsite(e.target.value)} />
       </div>
 
-      <div>
-        <button onClick={() => updateProfile({ username, website, avatarURL })} disabled={loading}>
-          {loading ? "Loading ..." : "Update"}
-        </button>
-      </div>
-
-      <div>
-        <button onClick={() => supabase.auth.signOut()}>Sign Out</button>
-      </div>
-
       <Avatar
         uid={user.id}
         url={avatarURL}
@@ -91,6 +81,16 @@ const AcDetails = ({ session }) => {
           updateProfile({ username, website, avatarURL: url })
         }}
       />
+
+      <div>
+        <button onClick={() => updateProfile({ username, website, avatarURL })} disabled={loading}>
+          {loading ? "Loading ..." : "Update"}
+        </button>
+      </div>
+
+      <div>
+        <button onClick={() => supabase.auth.signOut()}>Sign Out</button>
+      </div>
     </>
   )
 }

@@ -1,11 +1,11 @@
 import Head from "next/head"
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react"
+import { useSupabaseClient, useSession } from "@supabase/auth-helpers-react"
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react"
-import AcDetails from "../comp/AcDetails"
+import AcDetails from "@/comp/AcDetails"
 
 const HomePage = () => {
-  const session = useSession()
   const supabase = useSupabaseClient()
+  const session = useSession()
 
   return (
     <>

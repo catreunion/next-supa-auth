@@ -7,7 +7,7 @@ const Avatar = ({ uid, url, size, onUpload }) => {
   const [uploading, setUploading] = useState(false)
 
   useEffect(() => {
-    const downloadImage = async (path) => {
+    const loadImg = async (path) => {
       try {
         const { data, error } = await supabase.storage.from("avatars").download(path)
         if (error) {
@@ -19,16 +19,16 @@ const Avatar = ({ uid, url, size, onUpload }) => {
       }
     }
 
-    if (url) downloadImage(url)
+    if (url) loadImg(url)
   }, [url])
 
-  const uploadAvatar = async (event) => {
+  const uploadAvatar = async (e) => {
     try {
       setUploading(true)
-      if (!event.target.files || event.target.files.length === 0) {
+      if (!e.target.files || e.target.files.length === 0) {
         throw new Error("You must select an image to upload.")
       }
-      const file = event.target.files[0]
+      const file = e.target.files[0]
       const fileExtn = file.name.split(".").pop()
       const fileName = `${uid}.${fileExtn}`
       const filePath = `${fileName}`
