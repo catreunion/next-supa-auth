@@ -1,0 +1,9 @@
+{
+  "include": ["./src/**/*", "misc/prev-gallery/gallery00.js"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
