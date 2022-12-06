@@ -59,17 +59,17 @@ const AcDetails = ({ session }) => {
   return (
     <>
       <div>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">Email : </label>
         <input type="text" value={session.user.email} id="email" disabled />
       </div>
 
       <div>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="username">Username : </label>
         <input type="text" value={username || ""} id="username" onChange={(e) => setUsername(e.target.value)} />
       </div>
 
       <div>
-        <label htmlFor="website">Website</label>
+        <label htmlFor="website">Website : </label>
         <input type="website" value={website || ""} id="website" onChange={(e) => setWebsite(e.target.value)} />
       </div>
 
@@ -83,13 +83,9 @@ const AcDetails = ({ session }) => {
         }}
       />
 
-      <div>
-        <button onClick={() => updateProfile({ username, website, avatarURL })} disabled={loading}>
-          {loading ? "Loading ..." : "Update"}
-        </button>
-
-        <button onClick={() => supabaseClient.auth.signOut()}>Sign Out</button>
-      </div>
+      <button onClick={() => updateProfile({ username, website, avatarURL })} disabled={loading}>
+        {loading ? "Loading ..." : "Update"}
+      </button>
     </>
   )
 }

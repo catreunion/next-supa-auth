@@ -49,7 +49,7 @@ const AvatarPage = ({ uid, url, size, onUpload }) => {
       {avatarUrl ? <img src={avatarUrl} alt="Avatar" style={{ height: size, width: size }} /> : <div style={{ height: size, width: size }} />}
       <div style={{ width: size }}>
         <label className="button primary block" htmlFor="single">
-          {uploading ? "Uploading ..." : "Upload"}
+          {uploading ? "Uploading avatar ..." : "Add or change avatar"}
         </label>
         <input
           style={{

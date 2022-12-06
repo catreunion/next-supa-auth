@@ -1,11 +1,23 @@
-import Head from "next/head"
-import { useSupabaseClient, useSession } from "@supabase/auth-helpers-react"
+import { useEffect, useState } from "react"
+import { useSupabaseClient, useSession, useUser } from "@supabase/auth-helpers-react"
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react"
+import Head from "next/head"
 import AcDetails from "@/comp/AcDetails"
 
 const HomePage = () => {
   const supabaseClient = useSupabaseClient()
   const session = useSession()
+  const user = useUser()
+  const [data, setData] = useState()
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await supabaseClient.from("running").select()
+      setData(data)
+    }
+    // only get data if the user is logged in
+    if (user) getData()
+  }, [user])
 
   return (
     <>
@@ -14,7 +26,20 @@ const HomePage = () => {
         <meta name="description" content="desc" />
       </Head>
 
-      {!session ? <Auth supabaseClient={supabaseClient} appearance={{ theme: ThemeSupa }} theme="dark" /> : <AcDetails session={session} />}
+      {!session ? <Auth redirectTo="http://localhost:3000/" appearance={{ theme: ThemeSupa }} supabaseClient={supabaseClient} providers={["google", "github"]} socialLayout="horizontal" theme="light" /> : <AcDetails session={session} />}
+
+      {user ? <pre>{JSON.stringify(user, null, 2)}</pre> : <dir></dir>}
+
+      <button
+        onClick={() => {
+          supabaseClient.auth.signOut()
+          setData(null)
+        }}
+      >
+        Sign out
+      </button>
+
+      {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : <dir></dir>}
     </>
   )
 }
