@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react"
-import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react"
-import Avatar from "@/comp/Avatar"
+import { useState, useEffect } from 'react'
+import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react'
+import Avatar from '@/comp/Avatar'
 
 const AcDetails = ({ session }) => {
   const supabaseClient = useSupabaseClient()
@@ -14,7 +14,11 @@ const AcDetails = ({ session }) => {
     const getProfile = async () => {
       try {
         setLoading(true)
-        let { data, error, status } = await supabaseClient.from("profiles").select(`username, website, avatar_url`).eq("id", user.id).single()
+        let { data, error, status } = await supabaseClient
+          .from('profiles')
+          .select(`username, website, avatar_url`)
+          .eq('id', user.id)
+          .single()
         if (error && status !== 406) {
           throw error
         }
@@ -22,10 +26,10 @@ const AcDetails = ({ session }) => {
           setUsername(data.username)
           setWebsite(data.website)
           setAvatarURL(data.avatar_url)
-          console.log("data: ", data)
+          console.log('data: ', data)
         }
       } catch (error) {
-        alert("Error loading user data!")
+        alert('Error loading user data!')
         console.log(error)
       } finally {
         setLoading(false)
@@ -43,13 +47,13 @@ const AcDetails = ({ session }) => {
         username,
         website,
         avatar_url: avatarURL,
-        updated_at: new Date().toISOString()
+        updated_at: new Date().toISOString(),
       }
-      let { error } = await supabaseClient.from("profiles").upsert(updates)
+      let { error } = await supabaseClient.from('profiles').upsert(updates)
       if (error) throw error
-      alert("Profile updated!")
+      alert('Profile updated!')
     } catch (error) {
-      alert("Error updating the data!")
+      alert('Error updating the data!')
       console.log(error)
     } finally {
       setLoading(false)
@@ -65,12 +69,22 @@ const AcDetails = ({ session }) => {
 
       <div>
         <label htmlFor="username">Username : </label>
-        <input type="text" value={username || ""} id="username" onChange={(e) => setUsername(e.target.value)} />
+        <input
+          type="text"
+          value={username || ''}
+          id="username"
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </div>
 
       <div>
         <label htmlFor="website">Website : </label>
-        <input type="website" value={website || ""} id="website" onChange={(e) => setWebsite(e.target.value)} />
+        <input
+          type="website"
+          value={website || ''}
+          id="website"
+          onChange={(e) => setWebsite(e.target.value)}
+        />
       </div>
 
       <Avatar
@@ -84,7 +98,7 @@ const AcDetails = ({ session }) => {
       />
 
       <button onClick={() => updateProfile({ username, website, avatarURL })} disabled={loading}>
-        {loading ? "Loading ..." : "Update"}
+        {loading ? 'Loading ...' : 'Update'}
       </button>
     </>
   )
