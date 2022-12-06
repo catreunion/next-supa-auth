@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react"
 import { useSupabaseClient } from "@supabase/auth-helpers-react"
 
-const Avatar = ({ uid, url, size, onUpload }) => {
-  const supabase = useSupabaseClient()
+const AvatarPage = ({ uid, url, size, onUpload }) => {
+  const supabaseClient = useSupabaseClient()
   const [avatarUrl, setAvatarUrl] = useState(null)
   const [uploading, setUploading] = useState(false)
 
   useEffect(() => {
-    const loadImg = async (path) => {
+    const getAvatar = async (path) => {
       try {
-        const { data, error } = await supabase.storage.from("avatars").download(path)
+        const { data, error } = await supabaseClient.storage.from("avatars").download(path)
         if (error) {
           throw error
         }
         setAvatarUrl(URL.createObjectURL(data))
       } catch (error) {
-        console.log("Error downloading image: ", error)
+        console.log("error: ", error)
       }
     }
 
-    if (url) loadImg(url)
+    if (url) getAvatar(url)
   }, [url])
 
   const uploadAvatar = async (e) => {
@@ -30,9 +30,8 @@ const Avatar = ({ uid, url, size, onUpload }) => {
       }
       const file = e.target.files[0]
       const fileExtn = file.name.split(".").pop()
-      const fileName = `${uid}.${fileExtn}`
-      const filePath = `${fileName}`
-      let { error: uploadError } = await supabase.storage.from("avatars").upload(filePath, file, { upsert: true })
+      const filePath = `${uid}.${fileExtn}`
+      let { error: uploadError } = await supabaseClient.storage.from("avatars").upload(filePath, file, { upsert: true })
       if (uploadError) {
         throw uploadError
       }
@@ -68,4 +67,4 @@ const Avatar = ({ uid, url, size, onUpload }) => {
   )
 }
 
-export default Avatar
+export default AvatarPage
