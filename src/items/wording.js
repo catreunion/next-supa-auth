@@ -1,6 +1,6 @@
-export const homePageTitle = '提自己...'
+export const homePageTitle = '記憶有限　寫低先講'
 
-export const homePageDesc = '記憶有限, 寫低先講。A reminder app by Isaac Li.'
+export const homePageDesc = 'a reminder app by Isaac Li'
 
 export const logFormTitle = 'Add an activity'
 

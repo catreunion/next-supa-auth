@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { homePageTitle, homePageDesc } from '@/items/wording'
 import '@/lib/tailwind.css'
 // import { Fragment } from 'react'
 // import { Popover, Transition } from '@headlessui/react'
@@ -116,10 +117,10 @@ const App = ({ Component, pageProps }) => {
         <header className="bg-gray-50 py-24 sm:py-32">
           <div className="mx-auto max-w-md pl-4 pr-8 sm:max-w-lg sm:px-6 lg:max-w-7xl lg:px-8">
             <h1 className="text-center text-4xl font-bold leading-10 tracking-tight text-gray-900 sm:text-5xl sm:leading-none lg:text-6xl">
-              提自己...
+              {homePageTitle}
             </h1>
             <p className="mx-auto mt-6 max-w-3xl text-center text-xl leading-normal text-gray-500">
-              記憶有限，寫低先講。
+              {homePageDesc}
             </p>
           </div>
         </header>
