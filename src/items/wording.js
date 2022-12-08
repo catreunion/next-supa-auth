@@ -1,4 +1,4 @@
-export const homePageTitle = '記憶有限　寫低先講'
+export const homePageTitle = '寫低先講'
 
 export const homePageDesc = 'a reminder app by Isaac Li'
 
