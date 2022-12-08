@@ -36,7 +36,7 @@ const HomePage = () => {
       </Head>
 
       {!session ? (
-        <div className="flex h-full w-full items-center justify-center p-4">
+        <div className="flex h-full w-full items-center justify-center p-3">
           <Auth
             redirectTo="http://localhost:3000/"
             appearance={{ theme: ThemeSupa }}
@@ -49,7 +49,8 @@ const HomePage = () => {
       ) : (
         <div className="justify-centers flex h-full w-full flex-col items-center">
           {/* <AcDetails session={session} /> */}
-          <TodoList data={data} />
+          {/* <TodoList data={data} /> */}
+          <TodoList />
           <button
             onClick={() => {
               supabaseClient.auth.signOut()
