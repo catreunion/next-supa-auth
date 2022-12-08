@@ -12,7 +12,7 @@ const HomePage = () => {
   const session = useSession()
   const [data, setData] = useState(null)
 
-  // getData jokes setData
+  // getData
   useEffect(() => {
     const getData = async () => {
       const { data: todos, error } = await supabaseClient.from('todos').select()
@@ -35,33 +35,31 @@ const HomePage = () => {
         <meta name="description" content={homePageDesc} />
       </Head>
 
-      <div className="h-full w-full">
-        {!session ? (
-          <div className="flex h-full w-full items-center justify-center p-4">
-            <Auth
-              redirectTo="http://localhost:3000/"
-              appearance={{ theme: ThemeSupa }}
-              supabaseClient={supabaseClient}
-              // providers={['github']}
-              socialLayout="horizontal"
-              theme="light"
-            />
-          </div>
-        ) : (
-          <div className="flex h-full w-full flex-col items-center justify-center p-4">
-            {/* <AcDetails session={session} /> */}
-            <button
-              onClick={() => {
-                supabaseClient.auth.signOut()
-                setData(null)
-              }}
-            >
-              Sign out
-            </button>
-            <TodoList data={data} />
-          </div>
-        )}
-      </div>
+      {!session ? (
+        <div className="flex h-full w-full items-center justify-center p-4">
+          <Auth
+            redirectTo="http://localhost:3000/"
+            appearance={{ theme: ThemeSupa }}
+            supabaseClient={supabaseClient}
+            // providers={['github']}
+            socialLayout="horizontal"
+            theme="light"
+          />
+        </div>
+      ) : (
+        <div className="justify-centers flex h-full w-full flex-col items-center">
+          {/* <AcDetails session={session} /> */}
+          <TodoList data={data} />
+          <button
+            onClick={() => {
+              supabaseClient.auth.signOut()
+              setData(null)
+            }}
+          >
+            Sign out
+          </button>
+        </div>
+      )}
       {/* {user ? <pre>{JSON.stringify(user, null, 2)}</pre> : <dir></dir>} */}
       {/* {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : <dir></dir>} */}
     </>
