@@ -1,0 +1,8 @@
+/* add `@tailwind` directive for each Tailwind’s layer  */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#__next {
+  min-height: 100%;
+}

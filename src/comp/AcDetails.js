@@ -10,6 +10,7 @@ const AcDetails = ({ session }) => {
   const [website, setWebsite] = useState(null)
   const [avatarURL, setAvatarURL] = useState(null)
 
+  // getProfile
   useEffect(() => {
     const getProfile = async () => {
       try {

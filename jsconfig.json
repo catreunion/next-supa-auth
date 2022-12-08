@@ -1,5 +1,5 @@
 {
-  "include": ["./src/**/*", "misc/prev-gallery/gallery00.js"],
+  "include": ["./src/**/*"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
