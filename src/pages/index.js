@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import { useSupabaseClient, useUser, useSession } from '@supabase/auth-helpers-react'
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react'
 import Head from 'next/head'
-import AcDetails from '@/comp/AcDetails'
+// import AcDetails from '@/comp/AcDetails'
+import TodoList from '@/comp/TodoList'
 import { homePageTitle, homePageDesc } from '@/items/wording'
 
 const HomePage = () => {
@@ -14,11 +15,11 @@ const HomePage = () => {
   // getData jokes setData
   useEffect(() => {
     const getData = async () => {
-      const { data: jokes, error } = await supabaseClient.from('jokes').select()
+      const { data: todos, error } = await supabaseClient.from('todos').select()
       if (error) {
         console.log('error msg from supabase : ', error)
       } else {
-        setData(jokes)
+        setData(todos)
       }
     }
     // only get data if the user is logged in
@@ -34,47 +35,35 @@ const HomePage = () => {
         <meta name="description" content={homePageDesc} />
       </Head>
 
-      {!session ? (
-        <Auth
-          redirectTo="http://localhost:3000/"
-          appearance={{ theme: ThemeSupa }}
-          supabaseClient={supabaseClient}
-          providers={['github']}
-          socialLayout="horizontal"
-          theme="light"
-        />
-      ) : (
-        <AcDetails session={session} />
-      )}
-
+      <div className="h-full w-full">
+        {!session ? (
+          <div className="flex h-full w-full items-center justify-center p-4">
+            <Auth
+              redirectTo="http://localhost:3000/"
+              appearance={{ theme: ThemeSupa }}
+              supabaseClient={supabaseClient}
+              // providers={['github']}
+              socialLayout="horizontal"
+              theme="light"
+            />
+          </div>
+        ) : (
+          <div className="flex h-full w-full flex-col items-center justify-center p-4">
+            {/* <AcDetails session={session} /> */}
+            <button
+              onClick={() => {
+                supabaseClient.auth.signOut()
+                setData(null)
+              }}
+            >
+              Sign out
+            </button>
+            <TodoList data={data} />
+          </div>
+        )}
+      </div>
       {/* {user ? <pre>{JSON.stringify(user, null, 2)}</pre> : <dir></dir>} */}
-
-      <button
-        onClick={() => {
-          supabaseClient.auth.signOut()
-          setData(null)
-        }}
-      >
-        Sign out
-      </button>
-
       {/* {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : <dir></dir>} */}
-      {data &&
-        data.map((item) => (
-          <li key={item.id}>
-            <p>{item.left_q}</p>
-            <p>{item.right_q}</p>
-            <p>{item.left_a}</p>
-          </li>
-        ))}
-
-      {/* {data.map((item) => (
-        <li key={item.id}>
-          <p>{item.left_q}</p>
-          <p>{item.right_q}</p>
-          <p>{item.left_a}</p>
-        </li>
-      ))} */}
     </>
   )
 }

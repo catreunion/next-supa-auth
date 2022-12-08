@@ -1,13 +1,9 @@
-export const homePageTitle = 'Supabase auth demo'
+export const homePageTitle = '提自己...'
 
-export const homePageDesc = 'implementing authenticate'
+export const homePageDesc = '記憶有限, 寫低先講。A reminder app by Isaac Li.'
 
 export const logFormTitle = 'Add an activity'
 
 export const logFormDesc = 'desc of x'
 
-export const galleryTitle = 'Gallery of running log'
-
-export const galleryDesc = 'desc of x'
-
-export const keywords = 'running'
+export const keywords = 'remember'
