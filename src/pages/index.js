@@ -5,6 +5,7 @@ import Head from 'next/head'
 // import AcDetails from '@/comp/AcDetails'
 import TodoList from '@/comp/TodoList'
 import { homePageTitle, homePageDesc } from '@/items/wording'
+import { supabase } from '@/lib/supabase'
 
 const HomePage = () => {
   const supabaseClient = useSupabaseClient()
@@ -12,7 +13,7 @@ const HomePage = () => {
   const session = useSession()
   const [data, setData] = useState(null)
 
-  // getData
+  // get todos
   useEffect(() => {
     const getData = async () => {
       const { data: todos, error } = await supabaseClient.from('todos').select()
@@ -61,7 +62,9 @@ const HomePage = () => {
           </button>
         </div>
       )}
-      {/* {user ? <pre>{JSON.stringify(user, null, 2)}</pre> : <dir></dir>} */}
+
+      {session ? <pre>{JSON.stringify(session, null, 2)}</pre> : <dir></dir>}
+
       {/* {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : <dir></dir>} */}
     </>
   )

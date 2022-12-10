@@ -6,8 +6,8 @@ import '@/lib/tailwind.css'
 // import { Fragment } from 'react'
 // import { Popover, Transition } from '@headlessui/react'
 // import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid'
-import { footerNavigation } from '@/items/navigation'
+// import { ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid'
+// import { footerNavigation } from '@/items/navigation'
 
 const App = ({ Component, pageProps }) => {
   const [supabase] = useState(() => createBrowserSupabaseClient())
@@ -127,7 +127,7 @@ const App = ({ Component, pageProps }) => {
 
         {/* Contact Section */}
         <div className="relative bg-white">
-          <div className="lg:absolute lg:inset-0">
+          {/* <div className="lg:absolute lg:inset-0">
             <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
               <img
                 className="h-56 w-full object-cover lg:absolute lg:h-full"
@@ -135,8 +135,9 @@ const App = ({ Component, pageProps }) => {
                 alt=""
               />
             </div>
-          </div>
-          <div className="relative py-16 px-4 sm:py-24 sm:px-6 lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:px-8 lg:py-32">
+          </div> */}
+
+          <div className="lg:py-18 relative py-6 px-4 sm:py-12 sm:px-6 lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:px-8">
             <div className="lg:pr-8">
               <div className="mx-auto max-w-3xl sm:max-w-lg lg:mx-0">
                 {/* <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">A reminder app by Isaac Li</h2> */}
@@ -169,7 +170,7 @@ const App = ({ Component, pageProps }) => {
           </div>
         </div> */}
 
-        <footer className="bg-gray-900" aria-labelledby="footer-heading">
+        {/* <footer className="bg-gray-900" aria-labelledby="footer-heading">
           <h2 id="footer-heading" className="sr-only">
             Footer
           </h2>
@@ -194,7 +195,7 @@ const App = ({ Component, pageProps }) => {
                 </div>
               </div>
 
-              {/* <div className="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+              <div className="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
                 <div className="md:grid md:grid-cols-2 md:gap-8">
                   <div>
                     <h3 className="text-base font-medium text-gray-200">Solutions</h3>
@@ -248,7 +249,7 @@ const App = ({ Component, pageProps }) => {
                     </ul>
                   </div>
                 </div>
-              </div> */}
+              </div>
             </div>
             <div className="mt-12 border-t border-gray-700 pt-8">
               <p className="text-base text-gray-400 xl:text-center">
@@ -256,7 +257,7 @@ const App = ({ Component, pageProps }) => {
               </p>
             </div>
           </div>
-        </footer>
+        </footer> */}
       </div>
     </SessionContextProvider>
   )
